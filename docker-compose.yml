@@ -1,3 +1,4 @@
+version: "3"
 services:
   mariadb-1:
     container_name: mariadb-1
