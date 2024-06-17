@@ -1,0 +1,8 @@
+[mysqld]
+wsrep_on                = ON
+wsrep_cluster_name      = "MariaDB Cluster"
+wsrep_provider          = /usr/lib/galera/libgalera_smm.so
+wsrep_cluster_address   = "gcomm://mariadb-1,mariadb-2"
+wsrep_node_address      = "mariadb-2"
+binlog_format           = row
+bind-address            = 0.0.0.0

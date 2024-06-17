@@ -1,0 +1,52 @@
+services:
+  mariadb-1:
+    container_name: mariadb-1
+    image: mariadb:latest
+    volumes:
+      - ./config/mariadb-1.cnf:/etc/mysql/conf.d/galera.cnf:ro
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD : admin
+      MYSQL_DATABASE      : db
+      MYSQL_USER          : user
+      MYSQL_PASSWORD      : password
+    ports:
+      - "3307:3306"
+    networks:
+      - db-common
+
+  mariadb-2:
+    container_name: mariadb-2
+    image: mariadb:latest
+    volumes:
+      - ./config/mariadb-2.cnf:/etc/mysql/conf.d/galera.cnf:ro
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD : admin
+      MYSQL_DATABASE      : db
+      MYSQL_USER          : user
+      MYSQL_PASSWORD      : password
+    ports:
+      - "3308:3306"
+    networks:
+      - db-common
+    depends_on:
+      - mariadb-1
+
+  maxscale:
+    container_name: maxscale
+    image: mariadb/maxscale
+    volumes:
+      - ./config/maxscale.cnf:/etc/maxscale.cnf:ro
+    ports:
+      - "3306:3306"
+      - "8989:8989"
+    networks:
+      - db-common
+    depends_on:
+      - mariadb-1
+      - mariadb-2
+
+networks:
+  db-common:
+    driver: bridge

@@ -1,0 +1,40 @@
+[maxscale]
+threads             = auto
+admin_host          = 0.0.0.0
+admin_port          = 8989
+admin_auth          = 1
+admin_enabled       = 1
+admin_secure_gui    = false
+
+[Cluster-Monitor]
+type                = monitor
+module              = galeramon
+servers             = server1,server2
+user                = user
+password            = password
+monitor_interval    = 5000ms
+
+[Cluster-Service]
+type                = service
+router              = readwritesplit
+servers             = server1,server2
+user                = user
+password            = password
+
+[Cluster-Listener]
+type                = listener
+service             = Cluster-Service
+protocol            = MariaDBClient
+port                = 3306
+
+[server1]
+type                = server
+address             = mariadb-1
+port                = 3306
+protocol            = MariaDBBackend
+
+[server2]
+type                = server
+address             = mariadb-2
+port                = 3306
+protocol            = MariaDBBackend
