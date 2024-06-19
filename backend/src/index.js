@@ -1,4 +1,5 @@
 require('dotenv').config()
+const morgan = require('morgan');
 const express = require('express');
 const session = require('express-session');
 const { Issuer, generators } = require('openid-client');
@@ -14,6 +15,13 @@ const redirectUri = 'http://localhost:3000/callback';
 
 const sessionSecret = crypto.randomBytes(64).toString('hex')
 
+console.log(`Target environment: ${process.env.NODE_ENV}`);
+const isDev = (process.env.NODE_ENV === "development")
+
+if (isDev)
+  app.use(morgan("dev"))
+else
+  app.use(morgan("tiny"))
 
 app.use(session({
     secret: sessionSecret,
