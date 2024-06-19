@@ -3,9 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Web Service</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: rgb(186,183,233);
+            background: linear-gradient(225deg, rgba(186,183,233,1) 0%, rgba(184,232,211,1) 47%, rgba(205,237,244,1) 100%, rgba(185,232,213,1) 100%);
+        }
+
+        #block {
+            width: 400px;
+            height: 200px;
+            background-color: rgb(234, 234, 234);
+            border-width: 2px;
+            border-style: solid;
+            border-radius: 50px;
+            border-color: rgb(217, 217, 217);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 5px #bbbbbb2b;
+            gap: 20px;
+        }
+
+        #redirect {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            align-self: center;
+            border-radius: 1px;
+            border-style: solid;
+            border-radius: 50px;
+            border-color: rgb(217, 217, 217);
+            padding: 10px;
+            background-color: rgb(234, 234, 234);
+            color: black;
+            text-decoration: none;
+        }
+
+        #redirect:active {
+            border-color: rgb(205, 205, 205);
+            background-color: rgb(217, 217, 217);
+        }
+
+        #redirect:hover {
+            cursor: pointer;
+        }
+
+        #divider {
+            background-color: rgb(217, 217, 217);
+            height: 2px;
+            width: 360px;
+            align-self: center;
+        }
+
+        #title1 {
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+            align-self: center;
+            font-weight: 400;
+            font-size: x-large;
+        }
+    </style>
 </head>
 <body>
-    <a href="http://localhost:3000/login">Log in</a>
+    <div id="block">
+        <h4 id="title1">Choose a sign-in method:</h4>
+        <div id="divider"></div>
+        <a id="redirect" href="http://localhost:3000/login">Sign in with Google</a>
+    </div>
 </body>
 </html>
